@@ -1,9 +1,10 @@
 package com.taskmanager.controller;
 
-import java.util.List;
 import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,7 +18,7 @@ import com.taskmanager.service.TaskService;
 
 
 
-@RestController
+@Controller
 public class TaskController {
 	
 	Logger logger = Logger.getLogger(getClass().getName());
@@ -31,8 +32,9 @@ public class TaskController {
 	}
 	
 	@GetMapping("/tasks")
-	public List<Task> getAllTasks() {
-		return taskService.getAllTasks();
+	public String getAllTasks(Model model) {
+		model.addAttribute("tasks", taskService.getAllTasks());
+		return "tasks";
 	}
 	
 	@GetMapping("/tasks/{id}")
