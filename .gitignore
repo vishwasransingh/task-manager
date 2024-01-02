@@ -17,3 +17,12 @@ buildNumber.properties
 .classpath
 .project
 .settings
+
+/node_modules
+/build
+/dist
+.env
+/.idea
+.vscode
+/*.log
+*.swp
