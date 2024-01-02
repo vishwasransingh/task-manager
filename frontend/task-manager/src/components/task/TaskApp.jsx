@@ -1,5 +1,5 @@
-import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
 import React, { useState } from 'react';
+import { BrowserRouter, Routes, Route, useNavigate, useParams } from 'react-router-dom';
 import './TaskApp.css';
 
 export default function TaskManagerApp() {
@@ -8,7 +8,8 @@ export default function TaskManagerApp() {
             <Routes>
                 <Route path='/' element={<LoginComponent />} />
                 <Route path='/login' element={<LoginComponent />} />
-                <Route path='/welcome' element={<WelcomeComponent />} />
+                <Route path='/welcome/:username' element={<WelcomeComponent />} />
+                <Route path='*' element={<ErrorComponent />} />
             </Routes>
         </BrowserRouter>
     );
@@ -26,7 +27,7 @@ function LoginComponent() {
             console.log('Success');
             setShowSuccessMessage(true);
             setShowErrorMessage(false);
-            navigate('/welcome'); // Navigate to the '/welcome' route
+            navigate(`/welcome/${username}`); // Use backticks for string interpolation
         } else {
             console.log('Failed');
             setShowSuccessMessage(false);
@@ -44,6 +45,7 @@ function LoginComponent() {
 
     return (
         <div className="Login">
+            <h1>Login Page</h1>
             <div className="LoginForm">
                 <div>
                     <label>User Name:</label>
@@ -64,9 +66,21 @@ function LoginComponent() {
 }
 
 function WelcomeComponent() {
+    const { username } = useParams();
     return (
-        <div className="Welcome">
-            Welcome!
+        <div className="WelcomeComponent">
+            <h1>Welcome, {username}!</h1>
+        </div>
+    )
+}
+
+function ErrorComponent() {
+    return (
+        <div className="ErrorComponent">
+            <h1>We are working really hard!</h1>
+            <div>
+                Apologies for the 404. Reach out to our team at ABC-DEF-GHIJ.
+            </div>
         </div>
     )
 }
