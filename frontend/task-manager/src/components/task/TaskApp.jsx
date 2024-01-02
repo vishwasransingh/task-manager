@@ -4,17 +4,22 @@ import './TaskApp.css';
 
 export default function TaskManagerApp() {
     return (
-        <div className="TodoApp">
-            <BrowserRouter>
-                <Routes>
-                    <Route path='/' element={<LoginComponent />} />
-                    <Route path='/login' element={<LoginComponent />} />
-                    <Route path='/welcome/:username' element={<WelcomeComponent />} />
-                    <Route path='/tasks' element={<TaskListComponent /> } />
-                    <Route path='*' element={<ErrorComponent />} />
-                </Routes>
-            </BrowserRouter>
-        </div>
+        <BrowserRouter>
+            <div className="TodoApp">
+                <HeaderComponent />                               
+                
+                    <Routes>
+                        <Route path='/' element={<LoginComponent />} />
+                        <Route path='/logout' element={<LogoutComponent /> } />
+                        <Route path='/login' element={<LoginComponent />} />
+                        <Route path='/welcome/:username' element={<WelcomeComponent />} />
+                        <Route path='/tasks' element={<TaskListComponent /> } />
+                        <Route path='*' element={<ErrorComponent />} />
+                    </Routes>
+                
+                <FooterComponent />
+            </div>
+        </BrowserRouter>
     );
 }
 
@@ -102,7 +107,7 @@ function TaskListComponent() {
 
 
     return (
-        <div className="TaskListComponent">
+        <div className="container">
             <h1>Your Tasks : </h1>
             <div>
                 <table>
@@ -129,6 +134,52 @@ function TaskListComponent() {
                     </tbody>
 
                 </table>
+            </div>
+        </div>
+    )
+}
+
+function HeaderComponent() {
+    return (
+        <div className="header">
+            <header className="border-bottom border-light border-5 mb-5 p-2">
+                <div className="container">
+                <nav className="navbar navbar-expand-lg navbar-light">
+                    <Link to="/" className="navbar-brand">Home</Link>
+                    <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span className="navbar-toggler-icon"></span>
+                    </button>
+                    <div className="collapse navbar-collapse" id="navbarNav">
+                    <ul className="navbar-nav mr-auto">
+                        <li className="nav-item fs-5 mr-3"><Link to="/tasks">Tasks</Link></li>
+                    </ul>
+                    <ul className="navbar-nav">
+                        <li className="nav-item fs-5 mr-3"><Link to="/login">Login</Link></li>
+                        <li className="nav-item fs-5"><Link to="/logout">Logout</Link></li>
+                    </ul>
+                    </div>
+                </nav>
+                </div>
+            </header>
+        </div>
+
+    )
+}
+
+function FooterComponent() {
+    return (
+        <div className="footer">
+            <hr/> Footer 
+        </div>
+    )
+}
+
+function LogoutComponent() {
+    return (
+        <div className="LogoutComponent">
+            <h1>You are logged out!</h1>
+            <div>
+                Thank you!
             </div>
         </div>
     )
