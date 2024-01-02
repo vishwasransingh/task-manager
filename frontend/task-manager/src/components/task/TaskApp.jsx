@@ -1,17 +1,20 @@
 import React, { useState } from 'react';
-import { BrowserRouter, Routes, Route, useNavigate, useParams } from 'react-router-dom';
+import {BrowserRouter, Routes, Route, useNavigate, useParams, Link} from 'react-router-dom';
 import './TaskApp.css';
 
 export default function TaskManagerApp() {
     return (
-        <BrowserRouter>
-            <Routes>
-                <Route path='/' element={<LoginComponent />} />
-                <Route path='/login' element={<LoginComponent />} />
-                <Route path='/welcome/:username' element={<WelcomeComponent />} />
-                <Route path='*' element={<ErrorComponent />} />
-            </Routes>
-        </BrowserRouter>
+        <div className="TodoApp">
+            <BrowserRouter>
+                <Routes>
+                    <Route path='/' element={<LoginComponent />} />
+                    <Route path='/login' element={<LoginComponent />} />
+                    <Route path='/welcome/:username' element={<WelcomeComponent />} />
+                    <Route path='/tasks' element={<TaskListComponent /> } />
+                    <Route path='*' element={<ErrorComponent />} />
+                </Routes>
+            </BrowserRouter>
+        </div>
     );
 }
 
@@ -69,7 +72,10 @@ function WelcomeComponent() {
     const { username } = useParams();
     return (
         <div className="WelcomeComponent">
-            <h1>Welcome, {username}!</h1>
+            <h1>Welcome {username}</h1>
+            <div>
+                <Link to="/tasks">Task List</Link>
+            </div>
         </div>
     )
 }
@@ -80,6 +86,49 @@ function ErrorComponent() {
             <h1>We are working really hard!</h1>
             <div>
                 Apologies for the 404. Reach out to our team at ABC-DEF-GHIJ.
+            </div>
+        </div>
+    )
+}
+
+function TaskListComponent() {
+    const today = new Date()
+    const targetDate = new Date(today.getFullYear()+12, today.getMonth(), today.getDay())
+    const tasks = [
+                    {id: 1, title: 'Task1', targetDate:targetDate},
+                    {id: 2, title: 'Task2', targetDate:targetDate},
+                    {id: 3, title: 'Task3', targetDate:targetDate},
+                ]
+
+
+    return (
+        <div className="TaskListComponent">
+            <h1>Your Tasks : </h1>
+            <div>
+                <table>
+                    <thead>
+                            <tr>
+                                <td>ID</td>
+                                <td>Description</td>
+                                <td>Target Date</td>
+                            </tr>
+                    </thead>
+                    <tbody>
+                    {
+                        tasks.map(
+                            task => (
+                                <tr key={task.id}>
+                                    <td>{task.id}</td>
+                                    <td>{task.title}</td>
+                                    <td>{task.targetDate.toDateString()}</td>
+                                </tr>
+                            )
+                        )
+                    }
+
+                    </tbody>
+
+                </table>
             </div>
         </div>
     )
