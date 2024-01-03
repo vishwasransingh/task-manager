@@ -2,7 +2,6 @@ import React from 'react';
 import {BrowserRouter, Routes, Route, Navigate} from 'react-router-dom'
 import './TaskApp.css';
 import ErrorComponent from './ErrorComponent';
-import FooterComponent from './FooterComponent';
 import HeaderComponent from './HeaderComponent';
 import TaskListComponent from './TaskListComponent';
 import LoginComponent from './LoginComponent';
@@ -29,12 +28,6 @@ export default function TaskApp() {
                         <Routes>
                             <Route path='/' element={<LoginComponent />} />
                             <Route path='/login' element={ <LoginComponent /> } />
-                            <Route path='/logout' element={
-                                <AuthenticatedRoute>
-                                    <LogoutComponent /> 
-                                </AuthenticatedRoute>
-                            }/>
-                            <Route path='/login' element={<LoginComponent />} />
                             <Route path='/welcome/:username' element={
                                 <AuthenticatedRoute>
                                     <WelcomeComponent />
@@ -50,6 +43,11 @@ export default function TaskApp() {
                                     <TaskComponent /> 
                                 </AuthenticatedRoute>
                             } />
+                            <Route path='/logout' element={
+                                <AuthenticatedRoute>
+                                    <LogoutComponent /> 
+                                </AuthenticatedRoute>
+                            }/>
                             <Route path='*' element={<ErrorComponent />} />
                         </Routes>
                 </BrowserRouter>

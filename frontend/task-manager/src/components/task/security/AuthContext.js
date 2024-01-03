@@ -1,26 +1,31 @@
 import { createContext, useContext, useState } from "react";
 import { apiClient } from "../api/ApiClient";
 import {executeBasicAuthenticationService} from "./BasicAuthService";
+//1: Create a Context
+export const AuthContext = createContext()
 
-export const AuthContext = createContext();
-export const useAuth = () => useContext(AuthContext);
+export const useAuth = () => useContext(AuthContext)
 
+//2: Share the created context with other components
 export default function AuthProvider({ children }) {
 
+    //3: Put some state in the context
     const [isAuthenticated, setAuthenticated] = useState(false)
 
     const [username, setUsername] = useState(null)
 
     const [token, setToken] = useState(null)
 
-    // function login(username, password){
-    //     if (username === 'admin' && password === '12345') {
-    //         setAuthenticated(true);
-    //         return true;
+    // function login(username, password) {
+    //     if(username==='in28minutes' && password==='dummy'){
+    //         setAuthenticated(true)
+    //         setUsername(username)
+    //         return true            
     //     } else {
-    //         setAuthenticated(false);
-    //         return false;
-    //     }
+    //         setAuthenticated(false)
+    //         setUsername(null)
+    //         return false
+    //     }        
     // }
 
     async function login(username, password) {
@@ -55,7 +60,8 @@ export default function AuthProvider({ children }) {
         }
     }
 
-    function logout(){
+
+    function logout() {
         setAuthenticated(false)
         setToken(null)
         setUsername(null)
