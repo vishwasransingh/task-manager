@@ -8,24 +8,27 @@ import TaskListComponent from './TaskListComponent';
 import LoginComponent from './LoginComponent';
 import LogoutComponent from './LogoutComponent';
 import WelcomeComponent from './WelcomeComponent';
+import AuthProvider from './security/AuthContext';
 
 export default function TaskManagerApp() {
     return (
-        <BrowserRouter>
-            <div className="TodoApp">
-                <HeaderComponent />                               
-                
-                    <Routes>
-                        <Route path='/' element={<LoginComponent />} />
-                        <Route path='/logout' element={<LogoutComponent /> } />
-                        <Route path='/login' element={<LoginComponent />} />
-                        <Route path='/welcome/:username' element={<WelcomeComponent />} />
-                        <Route path='/tasks' element={<TaskListComponent /> } />
-                        <Route path='*' element={<ErrorComponent />} />
-                    </Routes>
-                
-                <FooterComponent />
-            </div>
-        </BrowserRouter>
+        <AuthProvider>
+            <BrowserRouter>
+                <div className="TodoApp">
+                    <HeaderComponent />                               
+                    
+                        <Routes>
+                            <Route path='/' element={<LoginComponent />} />
+                            <Route path='/logout' element={<LogoutComponent /> } />
+                            <Route path='/login' element={<LoginComponent />} />
+                            <Route path='/welcome/:username' element={<WelcomeComponent />} />
+                            <Route path='/tasks' element={<TaskListComponent /> } />
+                            <Route path='*' element={<ErrorComponent />} />
+                        </Routes>
+                    
+                    <FooterComponent />
+                </div>
+            </BrowserRouter>
+        </AuthProvider>
     );
 }

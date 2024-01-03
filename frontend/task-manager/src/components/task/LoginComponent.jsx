@@ -1,4 +1,6 @@
-import { useState, useNavigate } from "react";
+import { useState} from "react";
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from "./security/AuthContext";
 
 export default function LoginComponent() {
     const [username, setUsername] = useState('admin');
@@ -6,14 +8,19 @@ export default function LoginComponent() {
     const [showSuccessMessage, setShowSuccessMessage] = useState(false);
     const [showErrorMessage, setShowErrorMessage] = useState(false);
     const navigate = useNavigate(); // Access the navigate function from the hook
+    const authContext = useAuth();
 
     function handleSubmit() {
+        
         if (username === 'admin' && password === '12345') {
+            authContext.setAuthenticated(true);
             console.log('Success');
             setShowSuccessMessage(true);
             setShowErrorMessage(false);
             navigate(`/welcome/${username}`); // Use backticks for string interpolation
+            
         } else {
+            authContext.setAuthenticated(false);
             console.log('Failed');
             setShowSuccessMessage(false);
             setShowErrorMessage(true);
