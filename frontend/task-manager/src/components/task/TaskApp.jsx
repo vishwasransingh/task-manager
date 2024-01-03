@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter, Routes, Route} from 'react-router-dom';
+import {BrowserRouter, Routes, Route, Navigate} from 'react-router-dom'
 import './TaskApp.css';
 import ErrorComponent from './ErrorComponent';
 import FooterComponent from './FooterComponent';
@@ -8,7 +8,15 @@ import TaskListComponent from './TaskListComponent';
 import LoginComponent from './LoginComponent';
 import LogoutComponent from './LogoutComponent';
 import WelcomeComponent from './WelcomeComponent';
-import AuthProvider from './security/AuthContext';
+import AuthProvider, { useAuth } from './security/AuthContext'
+
+function AuthenticatedRoute({children}) {
+    const authContext = useAuth()
+    if(authContext.isAuthenticated)
+        return children
+
+    return <Navigate to="/" />
+}
 
 export default function TaskManagerApp() {
     return (
@@ -19,10 +27,22 @@ export default function TaskManagerApp() {
                     
                         <Routes>
                             <Route path='/' element={<LoginComponent />} />
-                            <Route path='/logout' element={<LogoutComponent /> } />
+                            <Route path='/logout' element={
+                                <AuthenticatedRoute>
+                                    <LogoutComponent /> 
+                                </AuthenticatedRoute>
+                            }/>
                             <Route path='/login' element={<LoginComponent />} />
-                            <Route path='/welcome/:username' element={<WelcomeComponent />} />
-                            <Route path='/tasks' element={<TaskListComponent /> } />
+                            <Route path='/welcome/:username' element={
+                                <AuthenticatedRoute>
+                                    <WelcomeComponent />
+                                </AuthenticatedRoute> 
+                            }/>
+                            <Route path='/tasks' element={
+                                <AuthenticatedRoute>
+                                    <TaskListComponent/> 
+                                </AuthenticatedRoute>
+                            }/>
                             <Route path='*' element={<ErrorComponent />} />
                         </Routes>
                     

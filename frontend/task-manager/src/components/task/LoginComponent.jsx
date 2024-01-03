@@ -5,24 +5,15 @@ import { useAuth } from "./security/AuthContext";
 export default function LoginComponent() {
     const [username, setUsername] = useState('admin');
     const [password, setPassword] = useState('12345');
-    const [showSuccessMessage, setShowSuccessMessage] = useState(false);
     const [showErrorMessage, setShowErrorMessage] = useState(false);
     const navigate = useNavigate(); // Access the navigate function from the hook
     const authContext = useAuth();
 
     function handleSubmit() {
         
-        if (username === 'admin' && password === '12345') {
-            authContext.setAuthenticated(true);
-            console.log('Success');
-            setShowSuccessMessage(true);
-            setShowErrorMessage(false);
+        if (authContext.login(username, password)) {
             navigate(`/welcome/${username}`); // Use backticks for string interpolation
-            
         } else {
-            authContext.setAuthenticated(false);
-            console.log('Failed');
-            setShowSuccessMessage(false);
             setShowErrorMessage(true);
         }
     }
@@ -51,7 +42,6 @@ export default function LoginComponent() {
                     <button type="button" name="login" onClick={handleSubmit}>login</button>
                 </div>
             </div>
-            {showSuccessMessage && <div className="successMessage">Authenticated Successfully</div>}
             {showErrorMessage && <div className="errorMessage">Authentication Failed. Please check your credentials.</div>}
         </div>
     )
