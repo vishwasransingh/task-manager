@@ -6,13 +6,13 @@ export default function LoginComponent() {
     const [username, setUsername] = useState('admin');
     const [password, setPassword] = useState('12345');
     const [showErrorMessage, setShowErrorMessage] = useState(false);
-    const navigate = useNavigate(); // Access the navigate function from the hook
+    const navigate = useNavigate();
     const authContext = useAuth();
 
     function handleSubmit() {
         
         if (authContext.login(username, password)) {
-            navigate(`/welcome/${username}`); // Use backticks for string interpolation
+            navigate(`/welcome/${username}`);
         } else {
             setShowErrorMessage(true);
         }

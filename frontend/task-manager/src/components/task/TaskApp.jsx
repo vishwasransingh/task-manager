@@ -9,6 +9,7 @@ import LoginComponent from './LoginComponent';
 import LogoutComponent from './LogoutComponent';
 import WelcomeComponent from './WelcomeComponent';
 import AuthProvider, { useAuth } from './security/AuthContext'
+import TaskComponent from './TaskComponent';
 
 function AuthenticatedRoute({children}) {
     const authContext = useAuth()
@@ -18,15 +19,16 @@ function AuthenticatedRoute({children}) {
     return <Navigate to="/" />
 }
 
-export default function TaskManagerApp() {
+export default function TaskApp() {
     return (
-        <AuthProvider>
-            <BrowserRouter>
-                <div className="TodoApp">
+        <div className="TaskApp">
+            <AuthProvider>
+                <BrowserRouter>
                     <HeaderComponent />                               
                     
                         <Routes>
                             <Route path='/' element={<LoginComponent />} />
+                            <Route path='/login' element={ <LoginComponent /> } />
                             <Route path='/logout' element={
                                 <AuthenticatedRoute>
                                     <LogoutComponent /> 
@@ -43,12 +45,15 @@ export default function TaskManagerApp() {
                                     <TaskListComponent/> 
                                 </AuthenticatedRoute>
                             }/>
+                            <Route path='/tasks/:id' element={
+                                <AuthenticatedRoute>
+                                    <TaskComponent /> 
+                                </AuthenticatedRoute>
+                            } />
                             <Route path='*' element={<ErrorComponent />} />
                         </Routes>
-                    
-                    <FooterComponent />
-                </div>
-            </BrowserRouter>
-        </AuthProvider>
+                </BrowserRouter>
+            </AuthProvider>
+        </div>
     );
 }

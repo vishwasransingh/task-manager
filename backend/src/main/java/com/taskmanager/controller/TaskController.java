@@ -53,5 +53,15 @@ public class TaskController {
 //        return ResponseEntity.noContent().build();
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+    
+    @GetMapping("/basicauth")
+	public String basicAuthCheck() {
+		return "Success"; 
+	}
+    
+    @GetMapping(path = "/path-variable/{name}")
+	public String getPathVariable(@PathVariable String name) {
+		return name;
+	}
 	
 }
