@@ -63,5 +63,10 @@ public class TaskController {
 	public String getPathVariable(@PathVariable String name) {
 		return name;
 	}
+    
+    @PutMapping(path = "/tasks/{id}/status")
+    public void updateTaskStatus(@PathVariable Integer id) {
+    	taskService.updateTaskStatus(id);
+    }
 	
 }

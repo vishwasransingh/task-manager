@@ -14,3 +14,6 @@ export const updateTaskApi
 
 export const createTaskApi
     = (task) => apiClient.post(`/tasks`, task)
+
+export const updateTaskStatusApi
+    = (id) => apiClient.put(`/tasks/${id}/status`)

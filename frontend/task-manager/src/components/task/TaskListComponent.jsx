@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import {useNavigate} from 'react-router-dom'
-import { retrieveAllTasksApi, deleteTaskApi } from './api/TaskApiService'
+import { retrieveAllTasksApi, deleteTaskApi, updateTaskStatusApi } from './api/TaskApiService'
 import { useAuth } from "./security/AuthContext"
 
 function TaskListComponent() {
@@ -58,16 +58,17 @@ function TaskListComponent() {
 
     function handleCheckboxChange(id) {
         console.log('clicked ' + id)
-        // deleteTaskApi(id)
-        // .then(
+        
+        updateTaskStatusApi(id)
+        .then(
 
-        //     () => {
-        //         setMessage(`Deletion of task with id = ${id} successful`)
-        //         refreshTasks()
-        //     }
+            () => {
+                setMessage(`Status of task with id = ${id} changed.`)
+                refreshTasks()
+            }
 
-        // )
-        // .catch(error => console.log(error))
+        )
+        .catch(error => console.log(error))
     }
 
     return (

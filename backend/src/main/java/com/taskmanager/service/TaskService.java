@@ -37,5 +37,11 @@ public class TaskService {
     public void deleteTask(Integer id) {
         taskRepository.deleteById(id);
     }
+
+	public void updateTaskStatus(Integer id) {
+		Task task = taskRepository.findById(id).orElse(null);
+		task.setStatus(!task.isStatus());
+		taskRepository.save(task);
+	}
 	
 }
