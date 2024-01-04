@@ -14,6 +14,7 @@ public class TaskService {
 	private TaskRepository taskRepository;
 	
 	public Task createNewTask(Task task) {
+		task.setStatus(false);
         return taskRepository.save(task);
     }
 	

@@ -56,6 +56,20 @@ function TaskListComponent() {
         navigate(`/tasks/-1`)
     }
 
+    function handleCheckboxChange(id) {
+        console.log('clicked ' + id)
+        // deleteTaskApi(id)
+        // .then(
+
+        //     () => {
+        //         setMessage(`Deletion of task with id = ${id} successful`)
+        //         refreshTasks()
+        //     }
+
+        // )
+        // .catch(error => console.log(error))
+    }
+
     return (
         <div className="container">
             <h1>Your Tasks</h1>
@@ -69,6 +83,7 @@ function TaskListComponent() {
                             <tr>
                                 <th>Title</th>
                                 <th>Target Date</th>
+                                <th>Status</th>
                                 <th>Delete</th>
                                 <th>Update</th>
                             </tr>
@@ -80,6 +95,13 @@ function TaskListComponent() {
                                 <tr key={task.id}>
                                     <td>{task.title}</td>
                                     <td>{task.targetDate.toString()}</td>
+                                    <td>
+                                        <input
+                                        type="checkbox"
+                                        checked={task.status}
+                                        onChange={() => handleCheckboxChange(task.id)}
+                                        />
+                                    </td>
                                     <td> <button className="btn btn-warning" 
                                                     onClick={() => deleteTask(task.id)}>Delete</button> </td>
                                     <td> <button className="btn btn-success" 

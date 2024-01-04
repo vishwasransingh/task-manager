@@ -11,11 +11,10 @@ export default function TaskComponent() {
     
     const[title, setTitle] = useState('')
     const[targetDate, setTargetDate] = useState('')
+    const[status, setStatus] = useState(false)
 
     const authContext = useAuth()
     const navigate = useNavigate()
-    
-    //const username = authContext.username
     
     useEffect(
         () => retrieveTask(),
@@ -28,6 +27,7 @@ export default function TaskComponent() {
             .then(response => {
                 setTitle(response.data.title)
                 setTargetDate(response.data.targetDate)
+                setStatus(response.data.status)
             })
             .catch(error => console.log(error))
         }
@@ -40,6 +40,7 @@ export default function TaskComponent() {
             id: id,
             title: values.title,
             targetDate: values.targetDate,
+            status: values.status
         }
 
         console.log(task)
@@ -82,7 +83,7 @@ export default function TaskComponent() {
         <div className="container">
             <h1>Enter Task Details </h1>
             <div>
-                <Formik initialValues={ { title, targetDate } } 
+                <Formik initialValues={ { title, targetDate, status } } 
                     enableReinitialize = {true}
                     onSubmit = {onSubmit}
                     validate = {validate}

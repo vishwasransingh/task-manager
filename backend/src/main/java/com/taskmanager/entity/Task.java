@@ -28,4 +28,6 @@ public class Task {
 	
 	private LocalDate targetDate;
 	
+	private boolean status;
+	
 }
