@@ -16,18 +16,6 @@ export default function AuthProvider({ children }) {
 
     const [token, setToken] = useState(null)
 
-    // function login(username, password) {
-    //     if(username==='in28minutes' && password==='dummy'){
-    //         setAuthenticated(true)
-    //         setUsername(username)
-    //         return true            
-    //     } else {
-    //         setAuthenticated(false)
-    //         setUsername(null)
-    //         return false
-    //     }        
-    // }
-
     async function login(username, password) {
 
         const baToken = 'Basic ' + window.btoa( username + ":" + password )

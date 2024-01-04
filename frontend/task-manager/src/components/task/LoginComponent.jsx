@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from "./security/AuthContext";
 
 export default function LoginComponent() {
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
+    const [username, setUsername] = useState('admin');
+    const [password, setPassword] = useState('12345');
     const [showErrorMessage, setShowErrorMessage] = useState(false);
     const navigate = useNavigate();
     const authContext = useAuth();
