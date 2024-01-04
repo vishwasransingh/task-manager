@@ -3,7 +3,8 @@ export default function ErrorComponent() {
         <div className="ErrorComponent">
             <h1>We are working really hard!</h1>
             <div>
-                Apologies for the 404. Reach out to our team at ABC-DEF-GHIJ.
+                Apologies for the 404.
+                Feel free to report an issue to us at : vishwasransingh@gmail.com
             </div>
         </div>
     )

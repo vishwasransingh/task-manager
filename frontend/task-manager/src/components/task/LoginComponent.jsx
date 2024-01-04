@@ -9,9 +9,9 @@ export default function LoginComponent() {
     const navigate = useNavigate();
     const authContext = useAuth();
 
-    function handleSubmit() {
+    async function handleSubmit() {
         
-        if (authContext.login(username, password)) {
+        if (await authContext.login(username, password)) {
             navigate(`/welcome/${username}`);
         } else {
             setShowErrorMessage(true);

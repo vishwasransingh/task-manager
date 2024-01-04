@@ -37,10 +37,10 @@ public class TaskController {
 		return taskService.getAllTasks();
 	}
 	
-//	@GetMapping("/tasks/{id}")
-//    public Task getTaskById(@PathVariable Integer id) {
-//        return taskService.getTaskById(id);
-//    }
+	@GetMapping("/tasks/{id}")
+    public Task getTaskById(@PathVariable Integer id) {
+        return taskService.getTaskById(id);
+    }
 
     @PutMapping("/tasks/{id}")
     public Task updateTask(@PathVariable Integer id, @RequestBody Task task) {

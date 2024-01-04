@@ -1,15 +1,11 @@
 import { createContext, useContext, useState } from "react";
 import { apiClient } from "../api/ApiClient";
-import {executeBasicAuthenticationService} from "./BasicAuthService";
-//1: Create a Context
+import {executeBasicAuthenticationService} from "./AuthenticationApiService";
+
 export const AuthContext = createContext()
-
 export const useAuth = () => useContext(AuthContext)
-
-//2: Share the created context with other components
 export default function AuthProvider({ children }) {
 
-    //3: Put some state in the context
     const [isAuthenticated, setAuthenticated] = useState(false)
 
     const [username, setUsername] = useState(null)

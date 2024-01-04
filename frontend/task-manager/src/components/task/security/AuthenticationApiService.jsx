@@ -10,4 +10,4 @@ export const executeBasicAuthenticationService
     )
 
 export const retrievePathVariable
-    = (username, token) => apiClient.get(`/path-variable/${username}`)
+    = (username) => apiClient.get(`/path-variable/${username}`)

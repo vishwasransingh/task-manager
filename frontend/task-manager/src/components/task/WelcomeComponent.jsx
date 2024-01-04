@@ -1,6 +1,6 @@
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import { retrievePathVariable } from './security/BasicAuthService';
+import { retrievePathVariable } from './security/AuthenticationApiService';
 import { useAuth } from './security/AuthContext';
 
 function WelcomeComponent() {
