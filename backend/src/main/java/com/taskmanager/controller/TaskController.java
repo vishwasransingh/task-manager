@@ -6,67 +6,98 @@ import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.taskmanager.entity.Task;
 import com.taskmanager.service.TaskService;
 
-
-
 @RestController
 public class TaskController {
-	
-	Logger logger = Logger.getLogger(getClass().getName());
-	
-	@Autowired
-	TaskService taskService;
-	
-	@PostMapping("/tasks")
-	public Task createNewTask(@RequestBody Task task) {
-		return taskService.createNewTask(task);
-	}
-	
-	@GetMapping("/tasks")
-	public List<Task> getAllTasks() {
-		return taskService.getAllTasks();
-	}
-	
-	@GetMapping("/tasks/{id}")
-    public Task getTaskById(@PathVariable Integer id) {
-        return taskService.getTaskById(id);
+
+    Logger logger = Logger.getLogger(getClass().getName());
+
+    @Autowired
+    TaskService taskService;
+
+    @PostMapping("/tasks")
+    public ResponseEntity<Task> createNewTask(@RequestBody Task task) {
+        try {
+            Task createdTask = taskService.createNewTask(task);
+            return new ResponseEntity<>(createdTask, HttpStatus.CREATED);
+        } catch (Exception e) {
+            logger.severe("Error creating task: " + e.getMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/tasks")
+    public ResponseEntity<List<Task>> getAllTasks() {
+        try {
+            List<Task> tasks = taskService.getAllTasks();
+            return new ResponseEntity<>(tasks, HttpStatus.OK);
+        } catch (Exception e) {
+            logger.severe("Error getting tasks: " + e.getMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/tasks/{id}")
+    public ResponseEntity<Task> getTaskById(@PathVariable Integer id) {
+        try {
+            Task task = taskService.getTaskById(id);
+            return task != null
+                    ? new ResponseEntity<>(task, HttpStatus.OK)
+                    : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } catch (Exception e) {
+            logger.severe("Error getting task by ID: " + e.getMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @PutMapping("/tasks/{id}")
-    public Task updateTask(@PathVariable Integer id, @RequestBody Task task) {
-        return taskService.updateTask(id, task);
+    public ResponseEntity<Task> updateTask(@PathVariable Integer id, @RequestBody Task task) {
+        try {
+            Task updatedTask = taskService.updateTask(id, task);
+            return updatedTask != null
+                    ? new ResponseEntity<>(updatedTask, HttpStatus.OK)
+                    : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } catch (Exception e) {
+            logger.severe("Error updating task: " + e.getMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @DeleteMapping("/tasks/{id}")
     public ResponseEntity<Void> deleteTask(@PathVariable Integer id) {
-        taskService.deleteTask(id);
-//        return ResponseEntity.noContent().build();
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        try {
+            boolean deleted = taskService.deleteTask(id);
+            return deleted
+                    ? new ResponseEntity<>(HttpStatus.NO_CONTENT)
+                    : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } catch (Exception e) {
+            logger.severe("Error deleting task: " + e.getMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
-    
+
     @GetMapping("/basicauth")
-	public String basicAuthCheck() {
-		return "Success"; 
-	}
-    
-    @GetMapping(path = "/path-variable/{name}")
-	public String getPathVariable(@PathVariable String name) {
-		return name;
-	}
-    
-    @PutMapping(path = "/tasks/{id}/status")
-    public void updateTaskStatus(@PathVariable Integer id) {
-    	taskService.updateTaskStatus(id);
+    public ResponseEntity<String> basicAuthCheck() {
+        return new ResponseEntity<>("Success", HttpStatus.OK);
     }
-	
+
+    @GetMapping(path = "/path-variable/{name}")
+    public ResponseEntity<String> getPathVariable(@PathVariable String name) {
+        return new ResponseEntity<>(name, HttpStatus.OK);
+    }
+
+    @PutMapping(path = "/tasks/{id}/status")
+    public ResponseEntity<Void> updateTaskStatus(@PathVariable Integer id) {
+        try {
+            taskService.updateTaskStatus(id);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e) {
+            logger.severe("Error updating task status: " + e.getMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }
