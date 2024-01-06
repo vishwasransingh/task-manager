@@ -57,8 +57,6 @@ export default function AuthProvider({ children }) {
                 return false
             }    
         } catch(error) {
-            // Perform logout if error occurs
-            logout()
             return false
         }
     }
@@ -69,6 +67,7 @@ export default function AuthProvider({ children }) {
         setAuthenticated(false)
         setToken(null)
         setUsername(null)
+        window.location.reload();
     }
 
     // Provide the AuthContext value to the wrapped components
