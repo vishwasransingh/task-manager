@@ -6,6 +6,7 @@ import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
 import java.util.UUID;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -42,6 +43,12 @@ import com.nimbusds.jose.proc.SecurityContext;
 @EnableWebSecurity
 @EnableMethodSecurity
 public class JwtSecurityConfig {
+	
+	@Value("${security.username}")
+	private String username;
+	
+	@Value("${security.password}")
+	private String password;
 
 	 /**
      * Configures the security filter chain for JWT authentication.
@@ -100,8 +107,8 @@ public class JwtSecurityConfig {
      */
     @Bean
     public UserDetailsService userDetailsService() {
-        UserDetails user = User.withUsername("admin")
-                                .password("{noop}12345")
+        UserDetails user = User.withUsername(username)
+                                .password("{noop}"+password)
                                 .authorities("read")
                                 .roles("USER")
                                 .build();
