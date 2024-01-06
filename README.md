@@ -26,15 +26,9 @@ This is a task management application with a Spring Boot backend and a React.js 
 - [Features](#features)
   - [Real-time Updates](#real-time-updates)
   - [Task Operations](#task-operations)
+  - [Security](#security)
 
-
-
-- [Security](#security)
-  - [JWT and Spring Security](#jwt-and-spring-security)
-
-
-- [Styling](#styling)
-  - [Bootstrap](#bootstrap)
+- [Demonstration Videos](#demonstration-videos)
 
 ## Getting Started
 
@@ -141,37 +135,57 @@ The application provides real-time updates of the task list, ensuring that users
 Users can perform the following operations on tasks:
 
 1. **Add Task:** Add a new task to the list.
-   
 
 https://github.com/vishwasransingh/task-manager/assets/142225419/a7d3e4ef-bbb5-4cd5-ae49-73260ab0a21f
 
-
-3. **Delete Task:** Remove an existing task from the list.
-
-
-   
+2. **Delete Task:** Remove an existing task from the list.
 
 https://github.com/vishwasransingh/task-manager/assets/142225419/fd4950aa-0f8e-4f84-8631-f62ecc29cd91
 
-
-5. **Update Task:** Modify the details of an existing task.
-
-
+3. **Update Task:** Modify the details of an existing task.
 
 https://github.com/vishwasransingh/task-manager/assets/142225419/a2269475-e2c7-4120-b9c0-f3fee510c757
-
-
-   
-7. **Toggle Completion:** Change the completion status of a task.
-
-   
+ 
+4. **Toggle Completion:** Change the completion status of a task.
 
 https://github.com/vishwasransingh/task-manager/assets/142225419/5f92add6-ec46-42f9-a1a9-cb344399d9d9
-
-
 
 ### Security
 - JWT and Spring Security
 : The communication between the frontend and backend is secured using JSON Web Tokens (JWT) and Spring Security. This ensures a secure and authenticated interaction between the modules.
 
-## Screenshots and Demonstrations
+## Demonstration Videos
+
+1. Starting application :
+   
+https://github.com/vishwasransingh/task-manager/assets/142225419/133e6396-c059-4fb0-b4a1-0c8fd4dd2cde
+
+2. Logging in :
+   
+https://github.com/vishwasransingh/task-manager/assets/142225419/6939571b-c9d7-4f26-a061-cf837f264ff2
+
+3. Wrong credentials :
+   
+https://github.com/vishwasransingh/task-manager/assets/142225419/8bba600c-783f-46f1-bec5-a85725bbfa60
+
+4. Navigation bar :
+   
+https://github.com/vishwasransingh/task-manager/assets/142225419/9f978ac1-61d1-4fcd-bfb9-55ee64249dd8
+
+5. Retrieving task-list :
+   
+https://github.com/vishwasransingh/task-manager/assets/142225419/48330ad8-3ced-4417-8d71-6d4ea40831c4
+
+6. Logging out :
+   
+https://github.com/vishwasransingh/task-manager/assets/142225419/b8c79258-c50e-42cd-ad7b-ef38229cf547
+
+
+   
+
+
+
+
+
+
+
