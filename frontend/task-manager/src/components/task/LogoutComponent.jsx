@@ -1,3 +1,7 @@
+/**
+ * LogoutComponent - Component for the logout page.
+ * Displays a confirmation message when the user is logged out.
+ */
 export default function LogoutComponent() {
     return (
         <div className="LogoutComponent">

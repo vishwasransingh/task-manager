@@ -12,11 +12,13 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Entity
+// Represents a Task entity in the Task Manager application.
 public class Task {
 	
 	@Id

@@ -37,11 +37,19 @@ import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
 
+// JWT Security configuration class.
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
 public class JwtSecurityConfig {
 
+	 /**
+     * Configures the security filter chain for JWT authentication.
+     *
+     * @param httpSecurity : The HttpSecurity object to configure.
+     * @return A SecurityFilterChain configured for JWT authentication.
+     * @throws Exception If an error occurs during configuration.
+     */
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity
@@ -71,6 +79,12 @@ public class JwtSecurityConfig {
                 .build();
     }
 
+    /**
+     * Configures the AuthenticationManager for JWT authentication.
+     *
+     * @param userDetailsService The userDetailsService to use for authentication.
+     * @return An AuthenticationManager configured for JWT authentication.
+     */
     @Bean
     public AuthenticationManager authenticationManager(
             UserDetailsService userDetailsService) {
@@ -79,6 +93,11 @@ public class JwtSecurityConfig {
         return new ProviderManager(authenticationProvider);
     }
 
+    /**
+     * Provides a simple in-memory UserDetailsService for testing purposes.
+     *
+     * @return A UserDetailsService with an in-memory user.
+     */
     @Bean
     public UserDetailsService userDetailsService() {
         UserDetails user = User.withUsername("admin")
@@ -90,6 +109,11 @@ public class JwtSecurityConfig {
         return new InMemoryUserDetailsManager(user);
     }
 
+    /**
+     * Provides a JWKSource for JWT key set.
+     *
+     * @return A JWKSource for JWT key set.
+     */
     @Bean
     public JWKSource<SecurityContext> jwkSource() {
         JWKSet jwkSet = new JWKSet(rsaKey());
@@ -97,11 +121,23 @@ public class JwtSecurityConfig {
                         -> jwkSelector.select(jwkSet)));
     }
 
+    /**
+     * Provides a JwtEncoder for encoding JWT tokens.
+     *
+     * @param jwkSource : The JWKSource for JWT key set.
+     * @return A JwtEncoder for encoding JWT tokens.
+     */
     @Bean
     JwtEncoder jwtEncoder(JWKSource<SecurityContext> jwkSource) {
         return new NimbusJwtEncoder(jwkSource);
     }
 
+    /**
+     * Provides a JwtDecoder for decoding JWT tokens.
+     *
+     * @return A JwtDecoder for decoding JWT tokens.
+     * @throws JOSEException if an error occurs during the construction of the decoder.
+     */
     @Bean
     JwtDecoder jwtDecoder() throws JOSEException {
         return NimbusJwtDecoder
@@ -109,6 +145,11 @@ public class JwtSecurityConfig {
                 .build();
     }
     
+    /**
+     * Provides an RSAKey for signing and verifying JWT tokens.
+     *
+     * @return An RSAKey for signing and verifying JWT tokens.
+     */
     @Bean
     public RSAKey rsaKey() {
         
@@ -121,6 +162,11 @@ public class JwtSecurityConfig {
                 .build();
     }
 
+    /**
+     * Generates an RSA Key Pair for JWT signing and verification.
+     *
+     * @return An RSA Key Pair.
+     */
     @Bean
     public KeyPair keyPair() {
         try {
@@ -134,5 +180,3 @@ public class JwtSecurityConfig {
     }
     
 }
-
-

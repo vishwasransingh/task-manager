@@ -7,9 +7,15 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 
-//@Configuration
 public class BasicAuthenticationSecurityConfiguration {
 	
+	/**
+     * Configures the security filter chain for JWT authentication.
+     *
+     * @param http The HttpSecurity object to configure.
+     * @return A SecurityFilterChain configured for JWT authentication.
+     * @throws Exception If an error occurs during configuration.
+     */
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		return 
@@ -24,7 +30,7 @@ public class BasicAuthenticationSecurityConfiguration {
 					.sessionManagement(
 						session -> session.sessionCreationPolicy
 						(SessionCreationPolicy.STATELESS))
-					.csrf().disable()
+					.csrf().disable() // Disable CSRF for stateless authentication
 					.build();
 	}
 

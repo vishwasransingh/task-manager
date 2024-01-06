@@ -1,16 +1,27 @@
 import { Link } from "react-router-dom";
 import { useAuth } from "./security/AuthContext";
 
+/**
+ * HeaderComponent - Component for the application header.
+ * Contains code for nav-bar.
+ * Displays navigation links based on the user's authentication status.
+ */
+
 export default function HeaderComponent() {
 
+    // Access the authentication context using the useAuth hook
     const authContext = useAuth();
+
+    // Extract the isAuthenticated status from the authentication context
     const isAuthenticated = authContext.isAuthenticated;
 
+    // Function to handle user logout
     function logout() {
         authContext.logout()
     }
 
     return (
+        // Header container with Bootstrap styling
         <header className="border-bottom border-light border-5 mb-5 p-2">
             <div className="container">
                 <div className="row">
@@ -27,7 +38,6 @@ export default function HeaderComponent() {
                             </ul>
                         </div>
                         <ul className="navbar-nav">
-                            {!isAuthenticated &&<li className="nav-item fs-5"><Link className="nav-link" to="/login">Login</Link></li>}
                             {isAuthenticated && <li className="nav-item fs-5"><Link className="nav-link" to="/logout" onClick={logout}>Logout</Link></li>}
                         </ul>
                     </nav>
