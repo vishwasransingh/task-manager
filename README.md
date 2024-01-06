@@ -141,9 +141,34 @@ The application provides real-time updates of the task list, ensuring that users
 Users can perform the following operations on tasks:
 
 1. **Add Task:** Add a new task to the list.
-2. **Delete Task:** Remove an existing task from the list.
-3. **Update Task:** Modify the details of an existing task.
-4. **Toggle Completion:** Change the completion status of a task.
+   
+
+https://github.com/vishwasransingh/task-manager/assets/142225419/a7d3e4ef-bbb5-4cd5-ae49-73260ab0a21f
+
+
+3. **Delete Task:** Remove an existing task from the list.
+
+
+   
+
+https://github.com/vishwasransingh/task-manager/assets/142225419/fd4950aa-0f8e-4f84-8631-f62ecc29cd91
+
+
+5. **Update Task:** Modify the details of an existing task.
+
+
+
+https://github.com/vishwasransingh/task-manager/assets/142225419/a2269475-e2c7-4120-b9c0-f3fee510c757
+
+
+   
+7. **Toggle Completion:** Change the completion status of a task.
+
+   
+
+https://github.com/vishwasransingh/task-manager/assets/142225419/5f92add6-ec46-42f9-a1a9-cb344399d9d9
+
+
 
 ### Security
 - JWT and Spring Security
