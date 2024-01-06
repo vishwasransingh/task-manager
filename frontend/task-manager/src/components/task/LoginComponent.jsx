@@ -11,6 +11,8 @@ export default function LoginComponent() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [showErrorMessage, setShowErrorMessage] = useState(false);
+
+    
     
     // Hook for navigation
     const navigate = useNavigate();
@@ -27,6 +29,10 @@ export default function LoginComponent() {
         } else {
             // If login fails, display an error message
             setShowErrorMessage(true);
+            // Set a timer to hide the error message after 5000 milliseconds (5 seconds)
+            setTimeout(() => {
+                setShowErrorMessage(false);
+            }, 5000);
         }
     }
 

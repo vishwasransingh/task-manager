@@ -37,6 +37,10 @@ function TaskListComponent() {
 
             () => {
                 setMessage(`Successfully deleted task with id : ${id}`)
+                // Set a timer to hide the error message after 5000 milliseconds (5 seconds)
+                setTimeout(() => {
+                    setMessage(false);
+                }, 5000);
                 refreshTasks()
             }
 
@@ -46,7 +50,7 @@ function TaskListComponent() {
 
     // Function to navigate to the task update page
     function updateTask(id) {
-        navigate(`/tasks/${id}`)
+        navigate(`/tasks/${id}`)       
     }
 
     // Function to navigate to the task creation page to add a new task
@@ -60,6 +64,11 @@ function TaskListComponent() {
         .then(
             () => {
                 setMessage(`Completion status of task with id : ${id} was toggled successfully.`)
+                // Set a timer to hide the error message after 5000 milliseconds (5 seconds)
+                setTimeout(() => {
+                    setMessage(false);
+                }, 5000);
+
                 refreshTasks()
             }
         )
